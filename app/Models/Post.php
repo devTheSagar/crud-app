@@ -12,7 +12,7 @@ class Post extends Model
 
         if($request->hasFile('image')){
             self::$image = $request->image;
-            self::$imageName = time() . '_' . self::$image->getClientOriginalName();
+            self::$imageName = time() . '_' . uniqid() . '_' . self::$image->getClientOriginalName();
             self::$directory = 'uploads/post-images/';
             self::$image->move(self::$directory, self::$imageName);
             return self::$directory . self::$imageName;

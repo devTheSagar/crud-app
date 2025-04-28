@@ -16,12 +16,13 @@ class PostController extends Controller
         $request->validate([
             'title'         => 'required|string|max:255',
             'description'   => 'required|string|max:10000',
-            'image'         => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:5120', // 5MB limit
+            'image'         => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5120', // 5MB limit
         ],[
-            'title.required'        => '<-- Title is required.',
+            'title.required'        => '<-- Title is required',
             'title.max'             => '<-- Title should be in 255 characters',
-            'description.required'  => '<-- Description is required.',
-            'description.max'       => '<-- Description should be in 10,000 characters'
+            'description.required'  => '<-- Description is required',
+            'description.max'       => '<-- Description should be in 10,000 characters',
+            'image.mimes'           => '<-- Image must be in jpg,jpeg,png or webp format'
         ]);
 
         Post::addPost($request);
@@ -44,12 +45,13 @@ class PostController extends Controller
         $request->validate([
             'title'         => 'required|string|max:255',
             'description'   => 'required|string|max:10000',
-            'image'         => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:5120', // 5MB limit
+            'image'         => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5120', // 5MB limit
         ],[
-            'title.required'        => '<-- Title is required.',
+            'title.required'        => '<-- Title is required',
             'title.max'             => '<-- Title should be in 255 characters',
-            'description.required'  => '<-- Description is required.',
-            'description.max'       => '<-- Description should be in 10,000 characters'
+            'description.required'  => '<-- Description is required',
+            'description.max'       => '<-- Description should be in 10,000 characters',
+            'image.mimes'           => '<-- Image must be in jpg,jpeg,png or webp format'
         ]);
 
         Post::updatePost($request, $id);

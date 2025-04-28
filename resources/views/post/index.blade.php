@@ -31,7 +31,13 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Image</label>
-                        <input type="file" name="image" class="form-control">
+                        &nbsp;&nbsp;&nbsp;
+                        <span style="color: red">
+                            @error('image')
+                                {{ $message }}
+                            @enderror
+                        </span>
+                        <input type="file" name="image" class="form-control" accept="image/*">
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
