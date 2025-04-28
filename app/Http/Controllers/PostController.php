@@ -12,12 +12,25 @@ class PostController extends Controller
     }
 
     function insert(Request $request){
+        // validation 
+        $request->validate([
+            'title'         => 'required|string|max:255',
+            'description'   => 'required|string|max:10000',
+            'image'         => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:5120', // 5MB limit
+        ],[
+            'title.required'        => '<-- Title is required.',
+            'title.max'             => '<-- Title should be in 255 characters',
+            'description.required'  => '<-- Description is required.',
+            'description.max'       => '<-- Description should be in 10,000 characters'
+        ]);
+
         Post::addPost($request);
-        return back()->with('success', 'Post added successfully!');
+        flash()->success('Post created successfully!');
+        return back();
     }
 
     function view(){
-        $posts = Post::all();
+        $posts = Post::orderBy('created_at', 'desc')->paginate(10);
         return view('post.view', ['posts' => $posts]);
     }
 
@@ -27,14 +40,27 @@ class PostController extends Controller
     }
 
     function update(Request $request, String $id){
+        // validation 
+        $request->validate([
+            'title'         => 'required|string|max:255',
+            'description'   => 'required|string|max:10000',
+            'image'         => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:5120', // 5MB limit
+        ],[
+            'title.required'        => '<-- Title is required.',
+            'title.max'             => '<-- Title should be in 255 characters',
+            'description.required'  => '<-- Description is required.',
+            'description.max'       => '<-- Description should be in 10,000 characters'
+        ]);
+
         Post::updatePost($request, $id);
-        return redirect(route('post.view'))->with('success', 'Post updated successfully!');
+        flash()->success('Post updated successfully!');
+        return redirect(route('post.view'));
     }
 
     function delete(String $id){
         Post::deletePost($id);
-        return back()->with('success', 'post deleted successfully!');
+        flash()->info('Post deleted successfully!');
+        return back();
     }
-
   
 }

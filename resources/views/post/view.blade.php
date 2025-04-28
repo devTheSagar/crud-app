@@ -20,9 +20,9 @@
                     <tbody>
                         @foreach ($posts as $post)
                             <tr>
-                                <th>{{ $loop->iteration }}</th>
-                                <td>{{ $post->title }}</td>
-                                <td>{{ $post->description }}</td>
+                                <th>{{ $posts->firstItem() + $loop->index }}</th>
+                                <td>{{ Str::limit($post->title, 20, '...') }}</td>
+                                <td>{{ Str::limit($post->description, 50, '...') }}</td>
                                 <td>
                                     <img src="{{ asset($post->image) }}" alt="img" height="50px" width="50px" style="border-radius: 50%">
                                 </td>
@@ -34,6 +34,7 @@
                         @endforeach
                     </tbody>
                 </table>
+                {{ $posts->links() }}
             </div>
         </div>
     </div>

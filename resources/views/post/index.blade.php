@@ -11,11 +11,23 @@
                     @csrf
                     <div class="mb-3">
                         <label class="form-label">Title</label>
-                        <input type="text" name="title" class="form-control">
+                        &nbsp;&nbsp;&nbsp;
+                        <span style="color: red">
+                            @error('title')
+                                {{ $message }}
+                            @enderror
+                        </span>
+                        <input type="text" name="title" class="form-control" value="{{ old('title') }}">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Description</label>
-                        <textarea name="description" class="form-control" id="" cols="20" rows="5"></textarea>
+                        &nbsp;&nbsp;&nbsp;
+                        <span style="color: red">
+                            @error('description')
+                                {{ $message }}
+                            @enderror
+                        </span>
+                        <textarea name="description" class="form-control" id="" cols="20" rows="5">{{ old('description') }}</textarea>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Image</label>

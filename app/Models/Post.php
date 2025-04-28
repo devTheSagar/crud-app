@@ -31,7 +31,7 @@ class Post extends Model
     }
 
     public static function updatePost($request, $id){
-        self::$post = Post::find($id);
+        self::$post = Post::findOrFail($id);
         self::$post->title = $request->title;
         self::$post->description = $request->description;
         // self::$post->image = $request->image;
@@ -45,7 +45,7 @@ class Post extends Model
     }
 
     public static function deletePost($id){
-        self::$post = Post::find($id);
+        self::$post = Post::findOrFail($id);
         if(self::$post->image !== 'uploads/post-images/default_post_image.jpg' && file_exists(self::$post->image)){
             unlink(self::$post->image);
         }
