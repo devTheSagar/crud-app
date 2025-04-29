@@ -64,5 +64,15 @@ class PostController extends Controller
         flash()->info('Post deleted successfully!');
         return back();
     }
+
+    function search(Request $request){
+        $post = Post::where('title', 'like', '%' . $request->search . '%')
+                    ->orWhere('description', 'like', '%' . $request->search . '%')
+                    ->paginate(10);
+
+        // rearch result pagination a next page a search value niye jay. eta na dile next page a search result kaj korbe na 
+        $post->appends($request->only('search'));
+        return view('post.view', ['posts' => $post]);
+    }
   
 }
